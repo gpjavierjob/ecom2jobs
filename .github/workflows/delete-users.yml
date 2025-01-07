@@ -1,0 +1,19 @@
+name: Eliminar Usuarios Anónimos
+on:
+  schedule:
+    # El cron job ejecutará esta acción cada día a las 2:00 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    # Permite ejecutar manualmente desde la interfaz de GitHub
+    # Usado para pruebas si es necesario
+    
+jobs:
+  delete_users:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_DOMAIN: ${{ secrets.PROJECT_DOMAIN }}
+
+    steps:
+      - name: Realizar solicitud HTTP a la API
+        run: |
+          curl -X GET https://$PROJECT_DOMAIN/api/delete-users
