@@ -1,0 +1,18 @@
+name: Crear Usuario Administrador Predeterminado
+
+on:
+  workflow_dispatch: # Solo ejecución manual
+
+jobs:
+  create_admin:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_DOMAIN: ${{ secrets.PROJECT_DOMAIN }}
+
+    steps:
+      - name: Configurar usuario administrador predeterminado
+        run: |
+          curl -X POST https://$PROJECT_DOMAIN/api/create-admin-user \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.ADMIN_API_KEY }}" \
+            -d "{\"email\": \"${{ secrets.ADMIN_EMAIL }}\", \"password\": \"${{ secrets.ADMIN_PASSWORD }}\"}"
