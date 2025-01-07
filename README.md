@@ -1,14 +1,14 @@
 # Eliminar Usuarios Anónimos en Firebase
 
-Este proyecto es un backend simple desplegado en **Vercel** que se encarga de eliminar periódicamente a los usuarios anónimos en tu base de datos de Firebase Authentication. Utiliza una **API Route** en Vercel que es ejecutada automáticamente utilizando **GitHub Actions**.
+Este proyecto es un backend simple desplegado que se encarga de eliminar periódicamente a los usuarios anónimos en tu base de datos de Firebase Authentication. Utiliza una **API Route** que es ejecutada automáticamente utilizando **GitHub Actions**.
 
 ## Funcionalidad
 
-El propósito de este proyecto es ejecutar un script de eliminación de usuarios anónimos a través de una API en Vercel. El script revisa los usuarios registrados en Firebase y elimina aquellos que hayan sido creados de manera anónima y no hayan iniciado sesión en los últimos 30 días.
+El propósito de este proyecto es ejecutar un script de eliminación de usuarios anónimos a través de una API. El script revisa los usuarios registrados en Firebase y elimina aquellos que hayan sido creados de manera anónima y no hayan iniciado sesión en los últimos 30 días.
 
 ## Arquitectura
 
-1. **Vercel API Route**: La función principal que elimina los usuarios anónimos está implementada como una API Route en Vercel. Esta función es llamada mediante una solicitud HTTP GET.
+1. **API Route**: La función principal que elimina los usuarios anónimos está implementada como una API Route. Esta función es llamada mediante una solicitud HTTP GET.
    
 2. **Firebase Admin SDK**: Usado para interactuar con Firebase Authentication y manejar la eliminación de usuarios.
 
@@ -22,13 +22,13 @@ Para desplegar este proyecto en Vercel, sigue estos pasos:
 
 1. Crea una cuenta en [Vercel](https://vercel.com/).
 2. Crea un nuevo proyecto y conecta tu repositorio de GitHub donde has subido este código.
-3. Asegúrate de configurar las variables de entorno en Vercel para el acceso a Firebase, como el archivo de credenciales de servicio.
+3. Asegúrate de configurar la variable de entorno FIREBASE_CREDENTIALS con el contenido o la ruta del archivo de credenciales de servicio para el acceso a Firebase.
 
 ### 2. Variables de Entorno en Vercel
 
 En la configuración de tu proyecto en Vercel, agrega las siguientes variables de entorno necesarias para que el **Firebase Admin SDK** funcione:
 
-- `GOOGLE_APPLICATION_CREDENTIALS`: Debe apuntar al archivo de credenciales de Firebase.
+- `FIREBASE_CREDENTIALS`: Debe apuntar al archivo de credenciales de Firebase o todo su contenido.
 
 ### 3. Configuración de GitHub Actions
 
@@ -49,7 +49,7 @@ Este cron job ejecuta el script de eliminación de usuarios anónimos mediante u
 
 ## Endpoints
 
-### `GET /api/eliminar-usuarios`
+### `GET /api/delete-users`
 
 Este endpoint está diseñado para ser ejecutado periódicamente para eliminar a los usuarios anónimos. La API realiza lo siguiente:
 
