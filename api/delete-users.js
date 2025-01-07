@@ -30,15 +30,22 @@ async function deleteAnonymousUsers() {
 
 // API Route de Vercel
 export default async (req, res) => {
-  if (req.method === 'GET') {
-    try {
-      await deleteAnonymousUsers();
-      res.status(200).send('Usuarios anónimos eliminados exitosamente.');
-    } catch (error) {
-      console.error('Error al eliminar usuarios:', error);
-      res.status(500).send('Hubo un error al eliminar los usuarios.');
-    }
-  } else {
-    res.status(405).send('Método no permitido');
+  // Verificar la clave API en el header
+  const apiKey = req.headers.authorization?.split(" ")[1]; // Extrae el token del header
+
+  if (apiKey !== process.env.ADMIN_API_KEY) {
+    return res.status(403).json({ error: "No autorizado" });
+  }
+
+  if (req.method !== "GET") {
+    res.status(405).send("Método no permitido");
+  }
+
+  try {
+    await deleteAnonymousUsers();
+    res.status(200).send("Usuarios anónimos eliminados exitosamente.");
+  } catch (error) {
+    console.error("Error al eliminar usuarios:", error);
+    res.status(500).send("Hubo un error al eliminar los usuarios.");
   }
 };
