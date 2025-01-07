@@ -63,7 +63,7 @@ Si deseas contribuir a este proyecto, por favor abre un **pull request** con las
 
 ## Licencia
 
-Este proyecto está bajo la licencia MIT. Para más detalles, consulta el archivo `LICENSE`.
+Este proyecto está bajo la licencia MIT. Para más detalles, consulta el archivo [LICENSE](LICENSE).
 
 ---
 
