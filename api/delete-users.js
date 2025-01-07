@@ -3,7 +3,7 @@ import { apps, initializeApp, credential as _credential, auth } from 'firebase-a
 // Inicializar Firebase Admin SDK
 if (!apps.length) {
   initializeApp({
-    credential: _credential.applicationDefault(),
+    credential: _credential.cert(JSON.parse(process.env.FIREBASE_CREDENTIALS)),
   });
 }
 
