@@ -67,9 +67,11 @@ La API realiza lo siguiente:
 Este job se encarga de eliminar periódicamente a los usuarios anónimos en tu base de datos de Firebase Authentication. Utiliza una **API Route** que es ejecutada automáticamente utilizando **GitHub Actions**.
 
 ### Funcionalidad
+### Funcionalidad
 
 El propósito de este proyecto es ejecutar un script de eliminación de usuarios anónimos a través de una API. El script revisa los usuarios registrados en Firebase y elimina aquellos que hayan sido creados de manera anónima y no hayan iniciado sesión en los últimos 30 días.
 
+### Arquitectura
 ### Arquitectura
 
 1. **API Route**: La función principal que elimina los usuarios anónimos está implementada como una API Route. Esta función es llamada mediante una solicitud HTTP GET.
@@ -79,14 +81,19 @@ El propósito de este proyecto es ejecutar un script de eliminación de usuarios
 3. **GitHub Actions**: Configurado para ejecutar el cron job automáticamente. Esto hace que la función se ejecute periódicamente sin intervención manual.
 
 ### Configuración
+### Configuración
 
+#### 1. Variables de Entorno en Vercel
 #### 1. Variables de Entorno en Vercel
 
 En la configuración de tu proyecto en Vercel, agrega las siguientes variables de entorno necesarias para que el **Firebase Admin SDK** funcione:
 
 - `FIREBASE_CREDENTIALS`: Debe apuntar al archivo de credenciales de Firebase o almacenar todo su contenido en código base64.
 - `ADMIN_API_KEY`: Debe contener la misma clave que la variable secret correspondiente del repositorio desde donde se ejecuta este proyecto.
+- `FIREBASE_CREDENTIALS`: Debe apuntar al archivo de credenciales de Firebase o almacenar todo su contenido en código base64.
+- `ADMIN_API_KEY`: Debe contener la misma clave que la variable secret correspondiente del repositorio desde donde se ejecuta este proyecto.
 
+#### 2. Configuración de GitHub Actions
 #### 2. Configuración de GitHub Actions
 
 GitHub Actions se encarga de ejecutar el cron job automáticamente. El archivo de configuración se encuentra en `.github/workflows/delete-users.yml`.
@@ -107,7 +114,9 @@ on:
 Este cron job ejecuta el script de eliminación de usuarios anónimos mediante una solicitud HTTP GET a la API de Vercel.
 
 ### Endpoint
+### Endpoint
 
+ `GET /api/delete-users`
  `GET /api/delete-users`
 
 Este endpoint está diseñado para ser ejecutado periódicamente para eliminar a los usuarios anónimos. La API realiza lo siguiente:
@@ -126,5 +135,6 @@ Este proyecto está bajo la licencia MIT. Para más detalles, consulta el archiv
 
 ---
 
+Gracias por utilizar este proyecto.
 Gracias por utilizar este proyecto.
 
